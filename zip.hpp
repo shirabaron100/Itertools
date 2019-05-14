@@ -1,5 +1,6 @@
 #include <iterator> // std::iterator,std::input_iterator_tag
 #include <iostream> // std::cout
+using namespace std;
 namespace itertools{
 template <class Z, class G>
 class zip

@@ -10,16 +10,14 @@ class range
  public:   
     class iterator : public std::iterator<std::input_iterator_tag, T>
     {
-        T* vector_ptr;
+        T vector_ptr;
       
     public:
-        iterator(T* vector) : vector_ptr(vector) {
+        iterator(T vector) : vector_ptr(vector) {
   
         }
         iterator& operator++() { 
-       
-        (*vector_ptr)++; 
-       
+        vector_ptr++; 
         return *this;
         }
         iterator operator++(int) { 
@@ -30,25 +28,24 @@ class range
            }
         bool operator==(const iterator& rhs) { 
            
-          return (*vector_ptr == *rhs.vector_ptr); 
+          return (vector_ptr == rhs.vector_ptr); 
           }
-        bool operator!=(const iterator& rhs) {
-           
-         return !(*vector_ptr==*rhs.vector_ptr);
+        bool operator!=(const iterator& rhs) {     
+         return !(vector_ptr==rhs.vector_ptr);
           }
         T& operator*() {
-          return *vector_ptr;
+          return vector_ptr;
           } 
     };
     range() {}
     range(T a, T b): a(a),b(b){}
     iterator begin()
     {
-        return iterator(&a);
+        return iterator(a);
     }  
     iterator end()
     {
-        return iterator(&b);
+        return iterator(b);
     }
 };
 }

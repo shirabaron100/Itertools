@@ -16,10 +16,10 @@ public:
         V2 secondIterator;
         V1 firstIteratorP;
         V2 secondIteratorP;
-        bool type;
-        iterator(V1 first, V2 second): firstIterator(first),firstIteratorP(first), secondIterator(second), secondIteratorP(second),type(true){}
+        iterator(V1 first, V2 second): firstIterator(first),firstIteratorP(first), secondIterator(second), secondIteratorP(second){
+        }
     
-         iterator& operator++() { 
+        iterator& operator++() { 
         secondIteratorP++;
         return *this;
         }
@@ -30,12 +30,14 @@ public:
           }
      bool operator!=( iterator<V1,V2>  &rhs) {
         if(*secondIteratorP==*rhs.secondIterator&&*firstIteratorP!=*rhs.firstIterator)
-         {
+        {
          firstIteratorP++;
          secondIteratorP=secondIterator;
-         }
+        }
         if(*firstIteratorP==*rhs.firstIterator)
+        {
          return false;
+        }
           return true;
         }
 
