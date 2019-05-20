@@ -73,18 +73,18 @@ int main() {
 
         //test to two strings
 	    string g="";
-        for (auto j:chain(string("hadarbaronn"),string("shirabaron")))
+        for (auto j:chain(string("hadarbaron"),string("shirabaron")))
         {
           g=g+j;
         }
-        testcase.CHECK_EQUAL(g,"hadarbaronshirabaron");
+        testcase.CHECK_OUTPUT(g,"hadarbaronshirabaron");
 
         string h="";
         for (auto j:chain(range('a','b'),string("shirabaron")))
         {
           h=h+j;
         }
-        testcase.CHECK_EQUAL(h,"ashirabaron");
+        testcase.CHECK_OUTPUT(h,"ashirabaron");
 ///////////////zip/////////////////////
         testcase.setname("zip test");
         char i='a';
@@ -115,16 +115,17 @@ int main() {
           n++;
           o++;
         }
-/////////product/////////
+///////product/////////
       testcase.setname("product test"); 
 
       testcase.setname("Test product: ");
 		string answerSS[]={"100,1","100,2","101,3","101,1","101,2","101,3","102,1","102,2","102,3"} ;
-		number=0;
+		int number=0;
         for (auto i: product(range(100,103), string("123"))){
          testcase.CHECK_OUTPUT(i, answerSS[number]); 
          number++;
-///////////powerset///////////////////
+        }
+// ///////////powerset///////////////////
 
      testcase.setname("powerset-test");
     ostringstream streamPowerSet1,streamPowerSet2;
@@ -135,7 +136,7 @@ int main() {
         for (auto i: powerset(chain(range('a','d'),range('x','z'))))
 			streamPowerSet2 << i << " "; 
 		testcase.CHECK_OUTPUT(streamPowerSet2.str(),"{},{a},{b},{ab},{c},{ac},{bc},{abc},{},{x},{y},{xy}");
-}  
+  
 
     grade = testcase.grade();
 	} else {
