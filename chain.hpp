@@ -17,7 +17,9 @@ public:
         V1 firstIterator;
         V2 secondIterator;
             bool type;
-            iterator(V1 first, V2 second): firstIterator(first), secondIterator(second), type(true){}
+            iterator(V1 first, V2 second): firstIterator(first), secondIterator(second), type(true){
+              
+            }
     
         iterator& operator++() { 
         if(type==true)
@@ -34,12 +36,18 @@ public:
           operator++(); 
           return tmp;
           }
-        bool operator!=( iterator<V1,V2>  &rhs) {
-         if (*firstIterator==*rhs.firstIterator){
-           type=false;
-        }
-         return !(*secondIterator==*rhs.secondIterator);
-        }
+        bool operator!=(iterator<V1,V2> const &diff) {
+               if(this->type && !(this->firstIterator != (diff.firstIterator))){
+                    this->type=false;
+               }
+               if(this->type==true){
+                return this->firstIterator != (diff.firstIterator);
+               }
+               else{
+                   return this->secondIterator != (diff.secondIterator);
+               }
+            }
+
         auto operator*() {
         if(type==true)
         return *firstIterator;
@@ -48,12 +56,13 @@ public:
     };
     chain() {}
 
-    chain<Z,G>(Z a, G b): a(a),b(b){}
-    auto begin() 
+    chain<Z,G>(Z a, G b): a(a),b(b){
+     }
+    auto begin() const
         { 
             return iterator<decltype(this->a.begin()),decltype(this->b.begin())>(this->a.begin(),this->b.begin()); 
         }  
-        auto end()  
+        auto end() const  
         { 
             return iterator<decltype(this->a.end()),decltype(this->b.end())>(this->a.end(),this->b.end()); 
         }   

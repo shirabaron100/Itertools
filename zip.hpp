@@ -17,7 +17,8 @@ public:
         V2 secondIterator;
         
             bool type;
-            iterator(V1 first, V2 second): firstIterator(first), secondIterator(second), type(true){}
+        iterator(V1 first, V2 second): firstIterator(first), secondIterator(second), type(true){
+        }
     
         iterator& operator++() { 
         firstIterator++;
@@ -30,27 +31,34 @@ public:
           return tmp;
           }
         bool operator!=( iterator<V1,V2>  &rhs) {
-         return !(*firstIterator==*rhs.firstIterator);
+        
+         return !((*secondIterator==*rhs.secondIterator));
         }
       pair<decltype(*firstIterator),decltype(*secondIterator)> operator*() {
+        //     std::cout << "shira" << std::endl;
+        // std::cout << *firstIterator << std::endl;
        //  return make_pair(*firstIterator,*secondIterator);
         return pair<decltype(*firstIterator),decltype(*secondIterator)>(*firstIterator,*secondIterator);
         } 
     };
     zip() {}
 
-    zip<Z,G>(Z a, G b): a(a),b(b){}
-    auto begin() 
+    zip<Z,G>(Z a, G b): a(a),b(b){
+  
+        
+    }
+    auto begin() const
         { 
             return iterator<decltype(this->a.begin()),decltype(this->b.begin())>(this->a.begin(),this->b.begin()); 
         }  
-    auto end()  
+    auto end()  const
         { 
             return iterator<decltype(this->a.end()),decltype(this->b.end())>(this->a.end(),this->b.end()); 
         }   
 };
+
+}
 template <typename v,typename m>
  ostream& operator<< (ostream& os, const pair<v,m>& p){
      return (os << p.first << "," << p.second);
  }
-}

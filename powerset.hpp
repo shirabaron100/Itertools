@@ -3,6 +3,7 @@
 #include <bitset>
 #include <math.h>
 #include <string>
+#include <set>
 using namespace std;
 namespace itertools{
 template <class Z>
@@ -11,6 +12,11 @@ class powerset
     Z a;
 public:   
    
+   typedef
+               typename std::remove_const<
+               typename std::remove_reference<
+               decltype(*a.begin())>::type>::type Element;
+
         class iterator{
     private:
     void reverseStr(string& str) 
@@ -42,6 +48,7 @@ public:
               auto start=itS;
                 while(start!=itE)
                 {
+                    
                    start++;
                     n++;
                     length++;
@@ -60,57 +67,64 @@ public:
         bool operator!=( iterator  &rhs) {
          return !(subsetIndex==rhs.n);
         }
-     string operator*() 
-     {
-    auto itPowerS =itS; 
+
+
+
+     set<Element> operator*() 
+     {  
+       auto itPowerS =itS; 
     string binary = toBinary(subsetIndex); //to binary
     reverseStr(binary);
     auto binstart=binary.begin();
     auto binend=binary.end();
-       string s= "{";
-       bool firstpsik=false;
-       while ((binstart!=binend))
+       set<Element> s;
+       while ((binstart!=binend)&&itPowerS!=itE)
        {
+        // std::cout << "shira" << std::endl; 
+        // std::cout << *itPowerS << std::endl;
            
             if (*binstart=='1')
                 {
-                    std::cout << "Shira " << *itPowerS << std::endl;
-                    if (s.compare("{")==0)
-                    firstpsik=true;
-                    else
-                    {
-                        firstpsik=false;
-                    }
-                    
-                    if (firstpsik==false)
-                    {
-                        s=s+","+to_string(*itPowerS);
-                    }
-                    else
-                    {
-                        s=s+to_string(*itPowerS);
-                    }
-                    
+                        s.insert(*itPowerS);                 
                 }
               itPowerS++; 
               binstart++; 
-       }
-        s=s+'}';
+       }  
         return s;
-        } 
-
+    } 
     };
     powerset (Z a): a(a){
     }
-    auto begin() 
+    auto begin() const
         { 
             return iterator(a); 
         }  
-    auto end()  
+    auto end()  const
         { 
              return iterator(a); 
         }   
 };
+}
 
-  
+template <typename D>
+std::ostream &operator<<(std::ostream &os, const std::set<D> &S)
+{
+    os << "{";
+
+    auto it = S.begin();
+    if(it != S.end())
+    { // first element is without comma seperator.
+        os << *it; 
+        ++it;
+    }
+
+    while (it != S.end())
+    {
+        os << ',' << *it;
+        ++it;
+    }
+
+    os << "}";
+
+    return os;
 }

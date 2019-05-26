@@ -39,11 +39,11 @@ class range
     };
     range() {}
     range(T a, T b): a(a),b(b){}
-    iterator begin()
+    iterator begin () const
     {
         return iterator(a);
     }  
-    iterator end()
+    iterator end () const
     {
         return iterator(b);
     }
