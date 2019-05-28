@@ -31,7 +31,7 @@ class range
           return (vector_ptr == rhs.vector_ptr); 
           }
         bool operator!=(const iterator& rhs) {     
-         return !(vector_ptr==rhs.vector_ptr);
+         return !(this->vector_ptr==rhs.vector_ptr);
           }
         T& operator*() {
           return vector_ptr;

@@ -32,7 +32,7 @@ public:
           }
         bool operator!=( iterator<V1,V2>  &rhs) {
         
-         return !((*secondIterator==*rhs.secondIterator));
+         return !((this->secondIterator!=rhs.secondIterator));
         }
       pair<decltype(*firstIterator),decltype(*secondIterator)> operator*() {
         //     std::cout << "shira" << std::endl;

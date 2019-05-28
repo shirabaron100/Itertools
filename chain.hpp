@@ -30,7 +30,6 @@ public:
         }
         return *this;
         }
-
         iterator operator++(int) { 
           iterator tmp(*this); 
           operator++(); 
@@ -57,10 +56,10 @@ public:
     chain() {}
 
     chain<Z,G>(Z a, G b): a(a),b(b){
-     }
+    }
     auto begin() const
         { 
-            return iterator<decltype(this->a.begin()),decltype(this->b.begin())>(this->a.begin(),this->b.begin()); 
+          return iterator<decltype(this->a.begin()),decltype(this->b.begin())>(this->a.begin(),this->b.begin()); 
         }  
         auto end() const  
         { 

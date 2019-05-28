@@ -43,7 +43,8 @@ public:
         int n=0;
         int subsetIndex=0;
         int length=0;
-            iterator(Z theBaseRange): itS(theBaseRange.begin()), itE(theBaseRange.end())
+        iterator(Z theBaseRange)
+        :itS(theBaseRange.begin()), itE(theBaseRange.end())
             {
               auto start=itS;
                 while(start!=itE)
@@ -72,17 +73,14 @@ public:
 
      set<Element> operator*() 
      {  
-       auto itPowerS =itS; 
+    auto itPowerS =itS; 
     string binary = toBinary(subsetIndex); //to binary
     reverseStr(binary);
     auto binstart=binary.begin();
     auto binend=binary.end();
-       set<Element> s;
+    set<Element> s;
        while ((binstart!=binend)&&itPowerS!=itE)
        {
-        // std::cout << "shira" << std::endl; 
-        // std::cout << *itPowerS << std::endl;
-           
             if (*binstart=='1')
                 {
                         s.insert(*itPowerS);                 
@@ -101,7 +99,7 @@ public:
         }  
     auto end()  const
         { 
-             return iterator(a); 
+            return iterator(a); 
         }   
 };
 }
@@ -113,7 +111,8 @@ std::ostream &operator<<(std::ostream &os, const std::set<D> &S)
 
     auto it = S.begin();
     if(it != S.end())
-    { // first element is without comma seperator.
+    { 
+        // first element is without comma seperator.
         os << *it; 
         ++it;
     }
